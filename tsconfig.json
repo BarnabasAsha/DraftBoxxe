@@ -21,7 +21,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "components/media/index.js",
+    "components/rich/index.js",
+    "components/richtext/index.js"
   ],
   "exclude": [
     "node_modules"

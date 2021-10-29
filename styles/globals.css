@@ -1,5 +1,8 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css');
 
+.zee {
+  z-index: 9999999999;
+}
 
 .RichEditor-root {
     background: #fff;

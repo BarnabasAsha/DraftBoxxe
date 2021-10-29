@@ -1,14 +1,15 @@
+import React from "react"
 import Header from "../components/Header"
 import Sidebar from "../components/Sidebar"
 
-const Layout = ({ children }) => {
+const Layout = (props: { children: any }) => {
     return (
-        <main className="w-full flex">
+        <main className="w-full h-screen flex">
             <Sidebar />
-            <section className="w-full bg-gray-200 p-5">
+            <section className="w-full h-full bg-gray-200 p-5">
                 <Header />
                 <>
-                    {children}
+                    {props.children}
                 </>
             </section>
         </main>

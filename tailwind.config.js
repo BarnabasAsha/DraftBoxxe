@@ -12,6 +12,9 @@ module.exports = {
         secondary: '#2D3139',
         tertiary: '#FEFFFE',
         dark: '#000505'
+      },
+      height: {
+        xx: '90%'
       }
     },
   },

@@ -1,14 +1,14 @@
 
 const Audio = (props: { src: string }) => {
-    return <audio controls src={props.src} className=" whitespace-normal" />;
+    return <audio controls src={props.src} className="w-full max-w-sm whitespace-normal" />;
 };
 
 const Image = (props: { src: string }) => {
-    return <img src={props.src} className=" whitespace-normal" />;
+    return <img src={props.src} className="w-full max-w-sm whitespace-normal" />;
 };
 
 const Video = (props: { src: string }) => {
-    return <video controls src={props.src} className=" whitespace-normal" />;
+    return <video controls src={props.src} className="w-full max-w-sm whitespace-normal" />;
 };
 
 const MediaRender = (props: { block: any, contentState: any }) => {

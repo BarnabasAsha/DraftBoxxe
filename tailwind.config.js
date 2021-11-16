@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        layout: 'repeat(auto-fit, minmax(10rem, 1fr))'
+        layout: 'repeat(auto-fit, minmax(16rem, 1fr))'
       },
       colors: {
         primary: '#5039EB',

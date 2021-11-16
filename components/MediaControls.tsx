@@ -11,11 +11,24 @@ const UploadMedia = (props: { type: string, toggle: Function }) => {
 
     const handleLinkChange = (e: any) => {
         if (e.which === 13) {
-            props.toggle('image', e.target.value)
+            props.toggle(props.type, e.target.value)
+        }
+    }
+
+    const handleFileType = () => {
+        switch (props.type) {
+            case 'image':
+                return 'image/*'
+            case 'audio':
+                return 'audio/*'
+            case 'video':
+                return 'video/*'
+            default:
+                return '';
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center">
+        <div className="relative w-full h-full flex flex-col justify-center items-center">
             <div className="mb-4">
                 <i className="text-3xl fas fa-image"></i>
             </div>
@@ -25,8 +38,9 @@ const UploadMedia = (props: { type: string, toggle: Function }) => {
             <span className="text-xl my-5">-----OR-----</span>
             <div className="mt-4">
                 <label className="cursor-pointer bg-secondary text-white text-sm py-2 px-4" htmlFor="upload">Browse Files</label>
-                <input className="sr-only" onChange={handleChange} id="upload" type="file" />
+                <input className="sr-only" onChange={handleChange} id="upload" type="file" accept={handleFileType()} />
             </div>
+            <button onClick={() => props.toggle()} className="absolute text-xl top-3 right-3"><i className="fas fa-times-circle"></i></button>
         </div>
     )
 }
@@ -50,8 +64,8 @@ const MediaControls = (props: { onToggle: Function }) => {
         <>
             <div>
                 <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('image')} aria-label="Upload Image"><i className="fas fa-image"></i></button>
-                <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('video')} aria-label="Upload Video"><i className="fas fa-video"></i></button>
-                <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('audio')} aria-label="Upload Audio"><i className="fas fa-headphones"></i></button>
+                {/* <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('video')} aria-label="Upload Video"><i className="fas fa-video"></i></button>
+                <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('audio')} aria-label="Upload Audio"><i className="fas fa-headphones"></i></button> */}
             </div>
             {
                 show ? (

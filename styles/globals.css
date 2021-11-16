@@ -4,19 +4,54 @@
   z-index: 9999999999;
 }
 
+._header {
+  height: 8%;
+}
+
+._main {
+  height: 92%;
+}
+
+
+/* Editor Styles */
+
 .RichEditor-root {
     background: #fff;
-    border: 1px solid #ddd;
     font-family: 'Georgia', serif;
     font-size: 14px;
     padding: 15px;
   }
   
   .RichEditor-editor {
+    width: 100%;
+    word-break: break-all;
     border-top: 1px solid #ddd;
     cursor: text;
     font-size: 16px;
     margin-top: 10px;
+  }
+
+  .RichEditor-editor h1 {
+    font-size: 2em;
+  }
+
+  .RichEditor-editor h2 {
+    font-size: 1.5em;
+  }
+  .RichEditor-editor h3 {
+    font-size: 1.17em;
+  }
+
+  .RichEditor-editor h4 {
+    font-size: 1em;
+  }
+
+  .RichEditor-editor h5 {
+    font-size: .83em;
+  }
+
+  .RichEditor-editor h6 {
+    font-size: .67em;
   }
   
   .RichEditor-editor .public-DraftEditorPlaceholder-root,

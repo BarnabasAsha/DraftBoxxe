@@ -1,7 +1,7 @@
 
 const EditorButton = (props: { label: string, toggle: Function, style: string, active: boolean, component: HTMLElement }) => {
 
-    const onToggle = (e: any) => {
+    const onToggle = (e) => {
         e.preventDefault()
         props.toggle(props.style)
     }

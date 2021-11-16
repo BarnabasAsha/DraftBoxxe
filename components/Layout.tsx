@@ -1,16 +1,22 @@
-import React from "react"
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
 import Header from "../components/Header"
-import Sidebar from "../components/Sidebar"
+import supabase from "../utils/supaBaseClient"
 
 const Layout = (props: { children: any }) => {
+    const router = useRouter()
+    const session = supabase.auth.session()
+
+    useEffect(() => {
+        if (!session) {
+            router.push('/login')
+        } 
+    }, [session])
     return (
-        <main className="w-full h-screen flex">
-            <Sidebar />
-            <section className="w-full h-full bg-gray-200 p-5">
-                <Header />
-                <>
-                    {props.children}
-                </>
+        <main className="w-full h-screen bg-white">
+            <Header />
+            <section className="_main">
+                {props.children}
             </section>
         </main>
     )

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { EditorState } from "draft-js";
 import EditorButton from "./EditorButton";
 
@@ -9,10 +8,7 @@ const BLOCK_STYLES = [
     { component: <i className="fas fa-code"></i>, style: 'code-block', label: 'Code Block' },
 ];
 
-const HEADING_STYLES = ['header-one', 'header-two', 'header-three', 'header-four', 'header-five', 'header-six']
-
 const BlockControls = (props: { editorState: EditorState, onToggle: Function }) => {
-    const [index, updateIndex] = useState(0)
     const { editorState, onToggle } = props
     const selection = editorState.getSelection()
     const blockType = editorState
@@ -20,19 +16,8 @@ const BlockControls = (props: { editorState: EditorState, onToggle: Function }) 
         .getBlockForKey(selection.getStartKey())
         .getType()
 
-    const increaseHeading = () => {
-        if (index < 6) {
-            onToggle(HEADING_STYLES[index])
-            updateIndex(index => index++)
-        }
-        updateIndex(0)
-    }
-
-    const decreaseHeading = () => {
-        if (index > 0 || index === 0) {
-            onToggle(HEADING_STYLES[index])
-            updateIndex(index => index--)
-        }
+    const setHeading = (e) => {
+        onToggle(e.target.value)
     }
 
     return (
@@ -49,8 +34,14 @@ const BlockControls = (props: { editorState: EditorState, onToggle: Function }) 
                     />
                 })
             }
-            <button className="border-0 outline-none text-black p-1 mx-2" onClick={increaseHeading}>A+</button>
-            <button className="border-0 outline-none text-black p-1 mx-2" onClick={decreaseHeading}>A-</button>
+            <select className="border-0 p-1 cursor-pointer" onChange={setHeading}>
+                <option aria-label="Heading One" value="header-one">H1</option>
+                <option aria-label="Heading Two" value="header-two">H2</option>
+                <option aria-label="Heading Three" value="header-three">H3</option>
+                <option aria-label="Heading Four" value="header-four">H4</option>
+                <option aria-label="Heading Five" value="header-five">H5</option>
+                <option aria-label="Heading Six" value="header-six">H6</option>
+            </select>
         </div>
     )
 }

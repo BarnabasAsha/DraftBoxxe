@@ -1,7 +1,50 @@
 import Head from "next/head"
+import { useState } from "react"
 import FormInput from "../components/FormInput"
+import supabase from '../utils/supaBaseClient'
+import { useRouter } from 'next/router'
+
+const initials = {
+    userName: "",
+    email: "",
+    password: ""
+}
 
 export default function Signin() {
+    const router = useRouter()
+    const [userDetails, setUserDetails] = useState(initials)
+
+    const handleChange = (e) => {
+        const { value, name } = e.target
+        setUserDetails({
+            ...userDetails,
+            [name]: value
+        })
+    }
+
+    const handleSignUp = async (e) => {
+        e.preventDefault()
+        if(userDetails.email === "" && userDetails.password === "" && userDetails.userName === "") {
+            return
+        }
+        const { user, error } = await supabase.auth.signUp(
+            {
+                email: userDetails.email,
+                password: userDetails.password
+            },
+            {
+                data: {
+                    userName: userDetails.userName
+                }
+            }
+        )
+        if(error) {
+            console.log(error.message)
+        } else {
+            console.log(user)
+            router.push('/verify-email')
+        }
+    }
     return (
         <>
             <Head>
@@ -12,10 +55,10 @@ export default function Signin() {
                 <div className="h-full w-full md:w-1/2 bg-tertiary flex flex-col justify-center px-20">
                     <h1 className="font-bold">Sign in.</h1>
                     <p className="font-bold text-2xl my-3">Get Started!</p>
-                    <form>
-                        <FormInput name="Username" label="Username" type="text" placeholder="Username" handleChange={() => { }} required autoFocus />
-                        <FormInput name="email" label="Email" type="email" placeholder="Email" handleChange={() => { }} required />
-                        <FormInput name="password" label="Password" type="password" placeholder="Password" handleChange={() => { }} required />
+                    <form onSubmit={handleSignUp}>
+                        <FormInput name="userName" label="Username" type="text" placeholder="Username" handleChange={handleChange} required autoFocus value={userDetails.userName} />
+                        <FormInput name="email" label="Email" type="email" placeholder="Email" handleChange={handleChange} required value={userDetails.email} />
+                        <FormInput name="password" label="Password" type="password" placeholder="Password" handleChange={handleChange} required value={userDetails.password} />
                         <button className="border-0 outline-none bg-primary text-white rounded-lg shadow my-3 py-3 px-4 w-full max-w-xs font-semibold">Create Account</button>
                     </form>
                 </div>

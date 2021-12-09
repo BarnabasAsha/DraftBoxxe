@@ -12,6 +12,7 @@ const Layout = (props: { children: any }) => {
             router.push('/login')
         } 
     }, [session])
+    
     return (
         <main className="w-full h-screen bg-white">
             <Header />

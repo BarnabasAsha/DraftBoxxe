@@ -1,25 +1,31 @@
 import { useState } from "react"
 import Layout from "../../components/Layout"
-import Link from 'next/link'
 import NoteEditor from '../../components/NoteEditor'
-import supabase from "../../utils/supaBaseClient"
+import { getSingleNote, updateNote } from "../../services/noteService"
+import NoteHeader from "../../components/NoteHeader"
 
-const CreateNote = ({ note }) => {
-    const [content, updateContent] = useState({title: "", content: "", snapshot: ""})
+interface Note {
+    title: string
+    content: string
+    snapshot: string
+}
+
+const Note = ({ note }) => {
+    const [content, updateContent] = useState<Note>({title: "", content: "", snapshot: ""})
     const [loading, setLoading] = useState(false)
     
-    const saveContent = (content: {title: "", content: "", snapshot: ""}) => {
+    const saveContent = (content: Note) => {
         updateContent(content)
     }
 
-    const SaveNote = async () => {
+    const saveNote = async () => {
         try {
             setLoading(true)
             console.log('loading...')
             const new_note = {
                 ...content,
             }
-           const {error} = await supabase.from('notes').update({...new_note}, {returning: "minimal"}).eq('id', Number(note.id))
+           const {error} = await updateNote(new_note, Number(note.id))
            if (error) {
                console.log(error.message)
             throw error
@@ -34,10 +40,7 @@ const CreateNote = ({ note }) => {
     
     return (
         <Layout>
-            <div className="w-full flex justify-between items-center shadow px-5 py-1">
-            <Link href="/library"><a className="border border-gray-200 p-2" aria-label="Back to notes"><i className="fas fa-long-arrow-alt-left mr-2"></i>Back to collection</a></Link>
-                <button onClick={SaveNote} className="border px-4 py-2"><span className="mr-1"><i className="fas fa-save"></i></span>Save</button>
-            </div>
+            <NoteHeader loading={loading} action={saveNote} />
             <NoteEditor initialContent={{title: note.title, content: note.content}} saveContent={saveContent} />
         </Layout>
     )
@@ -45,7 +48,7 @@ const CreateNote = ({ note }) => {
 
 export const getServerSideProps = async (context) => {
     const id = context.params.note
-    const { data, error } = await supabase.from('notes').select(`id, title, content`).eq('id', Number(id))
+    const { data, error } = await getSingleNote(Number(id))
     if(error) {
         console.log(error)
     }
@@ -55,4 +58,4 @@ export const getServerSideProps = async (context) => {
     }
 }
 
-export default CreateNote
+export default Note

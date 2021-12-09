@@ -1,9 +1,9 @@
 import Head from "next/head"
-import FormInput from "../components/FormInput"
+import AuthHeader from "../components/AuthWrapper"
 
 const VerifyEmail = () => {
     return (
-        <>
+        <AuthHeader>
             <Head>
                 <title>Draftboxe</title>
             </Head>
@@ -14,7 +14,7 @@ const VerifyEmail = () => {
                     <p className="mb-3">A Verification link has been sent to your email, Kindly use the link to signup</p>
                 </div>
             </main>
-        </>
+        </AuthHeader>
     )
 }
 

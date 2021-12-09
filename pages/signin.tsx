@@ -1,8 +1,10 @@
 import Head from "next/head"
 import { useState } from "react"
 import FormInput from "../components/FormInput"
-import supabase from '../utils/supaBaseClient'
+import { signup } from '../services/authService'
 import { useRouter } from 'next/router'
+import toast, { Toaster } from "react-hot-toast"
+import AuthHeader from "../components/AuthWrapper"
 
 const initials = {
     userName: "",
@@ -27,26 +29,16 @@ export default function Signin() {
         if(userDetails.email === "" && userDetails.password === "" && userDetails.userName === "") {
             return
         }
-        const { user, error } = await supabase.auth.signUp(
-            {
-                email: userDetails.email,
-                password: userDetails.password
-            },
-            {
-                data: {
-                    userName: userDetails.userName
-                }
-            }
-        )
+        const { error } = await signup(userDetails)
         if(error) {
-            console.log(error.message)
+            toast.error(error.message)
         } else {
-            console.log(user)
+            toast.success('Account Created')
             router.push('/verify-email')
         }
     }
     return (
-        <>
+        <AuthHeader>
             <Head>
                 <title>Hello Next</title>
             </Head>
@@ -62,7 +54,8 @@ export default function Signin() {
                         <button className="border-0 outline-none bg-primary text-white rounded-lg shadow my-3 py-3 px-4 w-full max-w-xs font-semibold">Create Account</button>
                     </form>
                 </div>
+                <Toaster position="top-right" />
             </main>
-        </>
+        </AuthHeader>
     )
 }

@@ -3,21 +3,17 @@ import Link from "next/link"
 import Box from "../components/Box"
 import Layout from "../components/Layout"
 import supabase from "../utils/supaBaseClient"
+import { getAllNotes } from '../services/noteService'
 
 const Library = () => {
     const [notes, updateNotes] = useState<{title: "", id:Number, snapshot:"", created_at:"", key:any}[]>([])
     const [loading, setLoading] = useState(false)
 
     const getNotes = async () => {
-        const user = supabase.auth.user()
         try {
             setLoading(true)
-            const { data } = await supabase.from('notes').select(`id, title, snapshot, created_at`).eq('created_by', user.id)
-            console.log(data, user.id, "heyy")
+            const { data } = await getAllNotes()
             updateNotes(data)
-            // if(error) {
-            //     throw(error)
-            // }
         } catch (error) {
             console.log(error.message)
         }finally {
@@ -33,17 +29,22 @@ const Library = () => {
             <div className="w-100 p-10">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bold text-xl">My Notes</h2>
-                    <Link href="/note"><a className="bg-secondary rounded text-white font-semibold px-4 py-2 text-sm">+ New Note</a></Link>
+                    <Link href="/create-note"><a className="bg-secondary rounded text-white font-semibold px-4 py-2 text-sm">+ New Note</a></Link>
                 </div>
                 <div>
                 <input className="mt-5 rounded border border-secondary bg-transparent p-3 w-64 h-10 outline-none" type="search" placeholder="Search here..." />
                 </div>
                 <ul className="mt-10 w-full grid grid-cols-layout items-center gap-5">
                     {
-                        notes.map(note => <Box key={note.id} {...note} />)
+                        loading ? (
+                            <li>Loading...</li>
+                        ) : (
+                                notes.length ? (
+                                    notes.map(note => <Box key={note.id} {...note} />)
+                                ) : <li>You have not created any notes</li>
+                        )
                     }
                 </ul>
-
             </div>
         </Layout>
     )

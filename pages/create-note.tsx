@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import Link from 'next/link'
-import Layout from "../../components/Layout"
-import NoteEditor from '../../components/NoteEditor'
-import supabase from '../../utils/supaBaseClient'
+import Layout from "../components/Layout"
+import NoteEditor from '../components/NoteEditor'
+import supabase from '../utils/supaBaseClient'
+import { createNote } from '../services/noteService'
+import NoteHeader from '../components/NoteHeader'
 
 const CreateNote = () => {
     const [content, updateContent] = useState({title: "", content: "", snapshot: ""})
@@ -22,7 +23,7 @@ const CreateNote = () => {
                 slug: content.title.replaceAll(" ", "-"),
                 created_by: user.id
             }
-           const {error} = await supabase.from('notes').insert([new_note], {returning: 'minimal'})
+           const {error} = await createNote(new_note)
            if (error) {
             throw error
           }
@@ -35,11 +36,8 @@ const CreateNote = () => {
 
     return (
         <Layout>
-            <div className="w-full flex justify-between items-center shadow px-5 py-2">
-                <Link href="/library"><a className="border border-gray-200 p-2" aria-label="Back to notes"><i className="fas fa-long-arrow-alt-left mr-2"></i>Back to collection</a></Link>
-                <button onClick={createNewNote} className="border px-4 py-2"><span className="mr-1"><i className="fas fa-save"></i></span>Save</button>
-            </div>
-            <NoteEditor saveContent={saveContent} />
+            <NoteHeader loading={loading} action={createNewNote} />
+            <NoteEditor initialContent={{title: null, content: null}} saveContent={saveContent} />
         </Layout>
     )
 }

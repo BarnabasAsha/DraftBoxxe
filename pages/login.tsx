@@ -1,8 +1,11 @@
 import Head from "next/head"
 import { useState } from "react"
 import FormInput from "../components/FormInput"
+import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from 'next/router'
 import supabase from '../utils/supaBaseClient'
+import { login } from "../services/authService"
+import AuthHeader from "../components/AuthWrapper"
 
 const initials = {
     email: "",
@@ -26,21 +29,17 @@ export default function Login() {
         if(userDetails.email === "" && userDetails.password === "" ) {
             return
         }
-        const { error } = await supabase.auth.signIn(
-            {
-                email: userDetails.email,
-                password: userDetails.password
-            }
-        )
+        const { error } = await login(userDetails)
         if(error) {
-            console.log(error.message)
+            toast.error(error.message)
         } else {
+            toast.success('Successfully Logged In')
             router.push('/library')
         }
     }
 
     return (
-        <>
+        <AuthHeader>
             <Head>
                 <title>Draftboxe - Login</title>
             </Head>
@@ -55,7 +54,8 @@ export default function Login() {
                         <button className="border-0 outline-none bg-primary text-white rounded-lg shadow my-3 py-3 px-4 w-full max-w-xs font-semibold">Login</button>
                     </form>
                 </div>
+                <Toaster position="top-right" />
             </main>
-        </>
+        </AuthHeader>
     )
 }

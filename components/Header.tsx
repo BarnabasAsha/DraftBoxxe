@@ -3,11 +3,29 @@ import useMenu from "../hooks/useMenu"
 import supabase from "../utils/supaBaseClient"
 import Menu from "./Menu"
 import Link from "next/link"
+import { useDialog } from "./Dialog"
+import { logout } from "../services/authService"
+import toast, { Toaster } from "react-hot-toast"
+import { useRouter } from "next/router"
 
 const Header = () => {
     const [username, setUsername] = useState("")
     const { visibility, position, toggleVisibility, showMenu } = useMenu()
     const user = supabase.auth.user()
+    const { showDialog } = useDialog()
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        const res = await showDialog('Are you sure? you could stay a little longer you know 🤷‍♂️')
+        if(res) {
+            const { error } = await logout()
+            router.push('/login')
+            if(error) {
+                toast.error(error.message)
+            }
+            toast.success('Logged out sucessfully')
+        }
+    }
 
     const menuList = [
         {
@@ -16,7 +34,7 @@ const Header = () => {
         },
         {
             item: <span><i className="fas fa-sign-out-alt"></i><span className="ml-3">Logout</span></span>,
-            'action': () => {}
+            'action': handleLogout
         }
     ]
 
@@ -41,6 +59,7 @@ const Header = () => {
                 </div>
             </div>
             { visibility ? <Menu closeMenu={toggleVisibility} position={position} list={menuList} /> : null }
+            <Toaster position="top-right" />
         </header>
     )
 }

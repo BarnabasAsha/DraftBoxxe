@@ -3,9 +3,8 @@ import { useState } from "react"
 import FormInput from "../components/FormInput"
 import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from 'next/router'
-import supabase from '../utils/supaBaseClient'
 import { login } from "../services/authService"
-import AuthHeader from "../components/AuthWrapper"
+import AuthWrapper from "../components/AuthWrapper"
 
 const initials = {
     email: "",
@@ -39,7 +38,7 @@ export default function Login() {
     }
 
     return (
-        <AuthHeader>
+        <AuthWrapper>
             <Head>
                 <title>Draftboxe - Login</title>
             </Head>
@@ -56,6 +55,6 @@ export default function Login() {
                 </div>
                 <Toaster position="top-right" />
             </main>
-        </AuthHeader>
+        </AuthWrapper>
     )
 }

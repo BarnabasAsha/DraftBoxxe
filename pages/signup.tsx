@@ -4,7 +4,7 @@ import FormInput from "../components/FormInput"
 import { signup } from '../services/authService'
 import { useRouter } from 'next/router'
 import toast, { Toaster } from "react-hot-toast"
-import AuthHeader from "../components/AuthWrapper"
+import AuthWrapper from "../components/AuthWrapper"
 
 const initials = {
     userName: "",
@@ -12,7 +12,7 @@ const initials = {
     password: ""
 }
 
-export default function Signin() {
+export default function Signup() {
     const router = useRouter()
     const [userDetails, setUserDetails] = useState(initials)
 
@@ -38,7 +38,7 @@ export default function Signin() {
         }
     }
     return (
-        <AuthHeader>
+        <AuthWrapper>
             <Head>
                 <title>Hello Next</title>
             </Head>
@@ -56,6 +56,6 @@ export default function Signin() {
                 </div>
                 <Toaster position="top-right" />
             </main>
-        </AuthHeader>
+        </AuthWrapper>
     )
 }

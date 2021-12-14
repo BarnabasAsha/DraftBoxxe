@@ -67,7 +67,7 @@ const Box = ({id, title, snapshot, created_at, slug }:note) => {
                 <i className="fas fa-ellipsis-v"></i>
             </button>
             { visibility ? <BoxMenu closeMenu={toggleVisibility} position={position} list={menuList} /> : null }
-            { showShare ? <ShareModal slug={slug} closeModal={handleShare} /> : null }
+            { showShare ? <ShareModal slug={slug} title={title} closeModal={handleShare} /> : null }
             <Toaster position="top-right" />
         </li>
     )

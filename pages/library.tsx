@@ -28,7 +28,6 @@ const Library = () => {
     }, [])
     return (
         <Layout>
-            
             <div className="w-100 p-10">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bold text-xl">My Notes</h2>
@@ -51,7 +50,6 @@ const Library = () => {
                 </ul>
                 </Dialog>
             </div>
-            
         </Layout>
     )
 }

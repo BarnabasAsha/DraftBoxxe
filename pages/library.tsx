@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import Link from "next/link"
 import Box from "../components/Box"
 import Layout from "../components/Layout"
-import supabase from "../utils/supaBaseClient"
 import { getAllNotes } from '../services/noteService'
+import Dialog from '../components/Dialog'
 
 const Library = () => {
     const [notes, updateNotes] = useState<{title: "", id:Number, snapshot:"", created_at:"", key:any}[]>([])
@@ -26,6 +26,7 @@ const Library = () => {
     }, [])
     return (
         <Layout>
+            
             <div className="w-100 p-10">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bold text-xl">My Notes</h2>
@@ -34,6 +35,7 @@ const Library = () => {
                 <div>
                 <input className="mt-5 rounded border border-secondary bg-transparent p-3 w-64 h-10 outline-none" type="search" placeholder="Search here..." />
                 </div>
+                <Dialog>
                 <ul className="mt-10 w-full grid grid-cols-layout items-center gap-5">
                     {
                         loading ? (
@@ -45,7 +47,9 @@ const Library = () => {
                         )
                     }
                 </ul>
+                </Dialog>
             </div>
+            
         </Layout>
     )
 }

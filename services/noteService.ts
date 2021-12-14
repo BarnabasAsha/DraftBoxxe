@@ -20,13 +20,15 @@ export const getSingleNote = async (id) => {
    return response
 }
 
-export const updateNote = (new_note, id) => {
-    const response = supabase.from('notes').update({...new_note}, {returning: "minimal"}).eq('id', id)
+export const updateNote = async (new_note, id) => {
+    const response = await supabase.from('notes').update({...new_note}, {returning: "minimal"}).eq('id', id)
     return response
 }
 
-export const deleteNote = () => {
-
+export const deleteNote = async (id:Number) => {
+    console.log(id)
+    const response = await supabase.from('notes').delete({returning: 'minimal'}).match({id: id})
+    return response
 }
 
 export const searchNotes = async (query) => {

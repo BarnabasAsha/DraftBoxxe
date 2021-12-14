@@ -1,6 +1,8 @@
 import Link from "next/link"
-import { useState } from 'react'
+import toast, { Toaster } from "react-hot-toast"
 import useMenu from "../hooks/useMenu"
+import { deleteNote } from "../services/noteService"
+import { useDialog } from "./Dialog"
 import BoxMenu from "./Menu"
 
 type note = {
@@ -12,6 +14,23 @@ type note = {
 
 const Box = ({id, title, snapshot, created_at}:note) => {
     const { visibility, position, toggleVisibility, showMenu } = useMenu()
+    const { showDialog } = useDialog()
+
+    const handleDelete = async () => {
+        const message = <>Are you sure you want to delete <strong>{title}</strong>?</>
+        const userResponse = await showDialog(message)
+        if(userResponse) {
+            try {
+              const { error } =  await deleteNote(id)
+              if(error) {
+                  console.log(error, 'hey')
+              }
+            }catch(error) {
+                console.log(error)
+                toast.error(error.message)
+            }
+        }
+    }
     
     const menuList = [
         {
@@ -20,7 +39,7 @@ const Box = ({id, title, snapshot, created_at}:note) => {
         },
         {
             item: <span><i className="fas fa-trash"></i><span className="ml-3">Delete</span></span>,
-            'action': () => console.log('delete')
+            'action': handleDelete
         }
     ]
 
@@ -42,6 +61,7 @@ const Box = ({id, title, snapshot, created_at}:note) => {
                 <i className="fas fa-ellipsis-v"></i>
             </button>
             { visibility ? <BoxMenu closeMenu={toggleVisibility} position={position} list={menuList} /> : null }
+            <Toaster position="top-right" />
         </li>
     )
 }

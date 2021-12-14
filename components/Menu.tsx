@@ -14,8 +14,8 @@ const Menu = ({ position, closeMenu, list }) => {
             <ul role="menu" className="w-28 h-24 shadow -translate-x-2 -translate-y-2 bg-white" style={{ position: 'fixed', zIndex: 1000000000, ...styles}}>
                 {
                     list.map((l, index) => (
-                        <li className="text-sm px-3 py-3 hover:bg-gray-50" key={index} role="menuitem">
-                            <button onClick={l.action}>{l.item}</button>
+                        <li className="text-sm w-full h-10 px-3 py-3 hover:bg-gray-50" key={index} role="menuitem">
+                            <button className="w-full h-full" onClick={l.action}>{l.item}</button>
                         </li>
                     ))
                 }

@@ -39,7 +39,7 @@ const MediaModal = (props: { type: string, toggle: Function, closeModal: Functio
                 <label className="cursor-pointer bg-secondary text-white text-sm py-2 px-4" htmlFor="upload">Browse Files</label>
                 <input className="sr-only" onChange={handleChange} id="upload" type="file" accept={handleFileType()} />
             </div>
-            <button onClick={() => props.closeModal()} className="absolute text-xl top-3 right-3"><i className="fas fa-times-circle"></i></button>
+            <button onClick={() => props.closeModal()} className="w-10 h-10 absolute text-xl top-1 right-1"><i className="fas fa-times-circle"></i></button>
         </div>
     </Modal>
     )

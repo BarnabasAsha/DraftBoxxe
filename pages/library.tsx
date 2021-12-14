@@ -5,8 +5,10 @@ import Layout from "../components/Layout"
 import { getAllNotes } from '../services/noteService'
 import Dialog from '../components/Dialog'
 
+interface iNote {title:string, id:Number, snapshot:string, created_at:string, slug:string, key:any}
+
 const Library = () => {
-    const [notes, updateNotes] = useState<{title: "", id:Number, snapshot:"", created_at:"", key:any}[]>([])
+    const [notes, updateNotes] = useState<iNote[]>([])
     const [loading, setLoading] = useState(false)
 
     const getNotes = async () => {

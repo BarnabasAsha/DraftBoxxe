@@ -1,20 +1,24 @@
 import Link from "next/link"
+import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import useMenu from "../hooks/useMenu"
 import { deleteNote } from "../services/noteService"
 import { useDialog } from "./Dialog"
 import BoxMenu from "./Menu"
+import ShareModal from "./ShareModal"
 
 type note = {
     id: Number,
-    title: "",
-    snapshot: "",
-    created_at: ""
+    title: string,
+    snapshot: string,
+    created_at: string,
+    slug: string
 }
 
-const Box = ({id, title, snapshot, created_at}:note) => {
+const Box = ({id, title, snapshot, created_at, slug }:note) => {
     const { visibility, position, toggleVisibility, showMenu } = useMenu()
     const { showDialog } = useDialog()
+    const [showShare, setShowShare] = useState(false)
 
     const handleDelete = async () => {
         const message = <>Are you sure you want to delete <strong>{title}</strong>?</>
@@ -31,11 +35,13 @@ const Box = ({id, title, snapshot, created_at}:note) => {
             }
         }
     }
+
+    const handleShare = () => setShowShare(share => !share)
     
     const menuList = [
         {
             item: <span><i className="fas fa-share-alt"></i><span className="ml-3">Share</span></span>,
-            'action': () => console.log('share')
+            'action': handleShare
         },
         {
             item: <span><i className="fas fa-trash"></i><span className="ml-3">Delete</span></span>,
@@ -61,6 +67,7 @@ const Box = ({id, title, snapshot, created_at}:note) => {
                 <i className="fas fa-ellipsis-v"></i>
             </button>
             { visibility ? <BoxMenu closeMenu={toggleVisibility} position={position} list={menuList} /> : null }
+            { showShare ? <ShareModal slug={slug} closeModal={handleShare} /> : null }
             <Toaster position="top-right" />
         </li>
     )

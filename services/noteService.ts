@@ -11,12 +11,12 @@ interface Note {
 const user = supabase.auth.user()
 
 export const getAllNotes = async () => {
-    const response = await supabase.from('notes').select(`id, title, snapshot, created_at`).eq('created_by', user.id)
+    const response = await supabase.from('notes').select(`id, title, snapshot, created_at, slug`).eq('created_by', user.id)
     return response
 }
 
 export const getSingleNote = async (id) => {
-   const response = await supabase.from('notes').select(`id, title, content`).eq('id', id)
+   const response = await supabase.from('notes').select(`id, title, content, slug`).eq('id', id)
    return response
 }
 

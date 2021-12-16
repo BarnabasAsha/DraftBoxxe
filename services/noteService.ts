@@ -16,7 +16,7 @@ export const getAllNotes = async () => {
 }
 
 export const getSingleNote = async (id) => {
-   const response = await supabase.from('notes').select(`id, title, content, slug`).eq('id', id)
+   const response = await supabase.from('notes').select(`id, title, content, slug, snapshot`).eq('id', id)
    return response
 }
 
@@ -32,7 +32,7 @@ export const deleteNote = async (id:Number) => {
 }
 
 export const searchNotes = async (query) => {
-    const response = await supabase.from('notes').select().textSearch('title', `${query}`)
+    const response = await supabase.from('notes').select().textSearch('title', `${query}`).eq('created_by', user.id)
     return response
 }
 

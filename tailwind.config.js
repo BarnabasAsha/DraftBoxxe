@@ -5,11 +5,11 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        layout: 'repeat(auto-fit, minmax(16rem, 16rem))'
+        layout: 'repeat(auto-fit, minmax(18rem, 18rem))'
       },
       colors: {
-        primary: '#5039EB',
-        secondary: '#2D3139',
+        primary: '#221f1f',
+        secondary: '#111010',
         tertiary: '#FEFFFE',
         dark: '#000505'
       },

@@ -115,14 +115,14 @@ const NoteEditor = (props: iEditor) => {
     }
 
     return (
-        <section className="w-full h-xx RichEditor-root">
-            <div className="flex items-center">
+        <section className="w-full max-w-7xl mx-auto p-8 h-xx RichEditor-root bg-secondary text-gray-300">
+            <div className="flex items-center my-4">
                 <InlineControl editorState={editorState} onToggle={toggleInlineStyle} />
                 <BlockControls editorState={editorState} onToggle={toggleBlockType} />
                 <MediaControls onToggle={toggleConfirmMedia} />
             </div>
             <div className="w-full h-xx mt-5 p-4">
-                <textarea className="border-0 font-bold text-xl w-full outline-none resize-none" name="title" placeholder="Title" rows={1} autoFocus value={title} onChange={(e) => setTitle(e.target.value)} />
+                <textarea role="link" className="border-0 bg-transparent cursor-pointer font-bold text-3xl w-full outline-none resize-none" name="title" placeholder="Title goes here..." rows={1} autoFocus value={title} onChange={(e) => setTitle(e.target.value)} />
                 <div className="RichEditor-editor">
                     <Editor blockRendererFn={mediaBlockRenderer} blockStyleFn={getBlockStyle} editorState={editorState} customStyleMap={styleMap} keyBindingFn={mapKeyToEditorCommand} onChange={setEditorState} handleKeyCommand={handleKeyCommand} spellCheck={true} ref={editorRef}
                     />
@@ -135,7 +135,7 @@ const NoteEditor = (props: iEditor) => {
 // Custom overrides for "code" style.
 const styleMap = {
     CODE: {
-        backgroundColor: '#000000',
+        backgroundColor: '#f4f4f4',
         fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
         fontSize: 16,
         padding: 2,

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import useMenu from "../hooks/useMenu"
 import supabase from "../utils/supaBaseClient"
 import Menu from "./Menu"
-import Link from "next/link"
 import { useDialog } from "./Dialog"
 import { logout } from "../services/authService"
 import toast, { Toaster } from "react-hot-toast"
@@ -29,10 +29,6 @@ const Header = () => {
 
     const menuList = [
         {
-            item: <Link href="/profile"><a href=""><i className="fas fa-user"></i><span className="ml-3">Profile</span></a></Link>,
-            'action': () => {}
-        },
-        {
             item: <span><i className="fas fa-sign-out-alt"></i><span className="ml-3">Logout</span></span>,
             'action': handleLogout
         }
@@ -45,8 +41,10 @@ const Header = () => {
     }, [user])
     
     return (
-        <header className="_header w-100 bg-gray-200 flex justify-between items-center px-5 py-2">
-            <div>Draftboxe</div>
+        <header className="_header w-100 flex justify-between items-center px-3 md:px-8 py-6">
+            <Link href="/">
+                <a><img className="w-40" src="/logo.png" alt="Draftboxe" /></a>
+            </Link>
             <div className="flex items-center">
                 <div className="relative flex justify-center items-center">
                     <span>Hello {username}</span>
@@ -58,7 +56,7 @@ const Header = () => {
                     </button>
                 </div>
             </div>
-            { visibility ? <Menu closeMenu={toggleVisibility} position={position} list={menuList} /> : null }
+            { visibility ? <Menu small closeMenu={toggleVisibility} position={position} list={menuList} /> : null }
             <Toaster position="top-right" />
         </header>
     )

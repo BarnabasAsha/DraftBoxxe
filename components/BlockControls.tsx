@@ -34,7 +34,7 @@ const BlockControls = (props: { editorState: EditorState, onToggle: Function }) 
                     />
                 })
             }
-            <select className="border-0 p-1 cursor-pointer" onChange={setHeading}>
+            <select className="bg-secondary text-gray-300 border-0 p-1 cursor-pointer" onChange={setHeading}>
                 <option aria-label="Heading One" value="header-one">H1</option>
                 <option aria-label="Heading Two" value="header-two">H2</option>
                 <option aria-label="Heading Three" value="header-three">H3</option>

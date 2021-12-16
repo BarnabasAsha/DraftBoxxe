@@ -3,6 +3,7 @@ import Layout from "../../components/Layout"
 import NoteEditor from '../../components/NoteEditor'
 import { getSingleNote, updateNote } from "../../services/noteService"
 import NoteHeader from "../../components/NoteHeader"
+import Viewer from "../../components/Viewer"
 
 interface Note {
     title: string
@@ -11,7 +12,8 @@ interface Note {
 }
 
 const Note = ({ note }) => {
-    const [content, updateContent] = useState<Note>({title: "", content: "", snapshot: ""})
+    const [content, updateContent] = useState<Note>({title: note.title, content: note.content, snapshot: note.snapshot})
+    const [edit, setEdit] = useState(false)
     const [loading, setLoading] = useState(false)
     
     const saveContent = (content: Note) => {
@@ -21,7 +23,6 @@ const Note = ({ note }) => {
     const saveNote = async () => {
         try {
             setLoading(true)
-            console.log('loading...')
             const new_note = {
                 ...content,
             }
@@ -29,7 +30,7 @@ const Note = ({ note }) => {
            if (error) {
                console.log(error.message)
             throw error
-          } console.log('done')
+          } setEdit(false)
         }catch (e) {
             console.log(e.message)
         }finally {
@@ -40,8 +41,14 @@ const Note = ({ note }) => {
     
     return (
         <Layout>
-            <NoteHeader loading={loading} action={saveNote} />
-            <NoteEditor initialContent={{title: note.title, content: note.content}} saveContent={saveContent} />
+            <NoteHeader loading={loading} edit={edit} setEdit={setEdit} action={saveNote} />
+            {
+                edit ? (
+                    <NoteEditor initialContent={{title: note.title, content: note.content}} saveContent={saveContent} />
+                ) : (
+                    <Viewer title={content.title} content={content.content} />
+                )
+            }
         </Layout>
     )
 }

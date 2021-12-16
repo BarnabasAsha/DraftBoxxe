@@ -51,7 +51,7 @@ const Box = ({id, title, snapshot, created_at, slug }:note) => {
 
 
     return (
-        <li className="relative w-64 rounded-xl h-48 bg-gray-100 shadow-sm p-5 overflow-hidden">
+        <li className="relative w-72 rounded-xl h-48 bg-primary shadow-sm p-5 overflow-hidden">
             <div>
                 <time className="text-xs font-medium text-gray-400">{(new Date(created_at).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))}</time>
                 <h2 className="text-base leading-5 font-bold my-2">

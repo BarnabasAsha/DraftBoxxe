@@ -20,7 +20,7 @@ const Modal: FC = ({ children }) => {
 
     const ModalContent =
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-400 flex justify-center items-center bg-opacity-30 zee">
-            <div className="w-4/5 md:w-2/5 h-80 bg-white rounded-lg shadow">
+            <div className="w-4/5 md:w-1/3 h-80 bg-white rounded-lg shadow">
                 {children}
             </div>
         </div>

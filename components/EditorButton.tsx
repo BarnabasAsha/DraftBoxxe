@@ -6,7 +6,7 @@ const EditorButton = (props: { label: string, toggle: Function, style: string, a
         props.toggle(props.style)
     }
     return (
-        <button aria-label={props.label} onMouseDown={onToggle} className={`border-0 outline-none text-black p-1 mx-2 ${props.active ? 'text-blue-700' : null}`}>
+        <button aria-label={props.label} onMouseDown={onToggle} className={`border-0 outline-none text-gray-300 p-1 mx-2 ${props.active ? 'text-blue-700' : null}`}>
             {props.component}
         </button>
     )

@@ -1,11 +1,11 @@
 import Modal from "./Modal"
 
 const MediaModal = (props: { type: string, toggle: Function, closeModal: Function }) => {
-    const handleChange = (e: any) => {
-        const img = e.target.files[0]
-        const url = URL.createObjectURL(img)
-        props.toggle(props.type, url)
-    }
+    // const handleChange = (e: any) => {
+    //     const img = e.target.files[0]
+    //     const url = URL.createObjectURL(img)
+    //     props.toggle(props.type, url)
+    // }
 
     const handleLinkChange = (e: any) => {
         if (e.which === 13) {
@@ -13,18 +13,18 @@ const MediaModal = (props: { type: string, toggle: Function, closeModal: Functio
         }
     }
 
-    const handleFileType = () => {
-        switch (props.type) {
-            case 'image':
-                return 'image/*'
-            case 'audio':
-                return 'audio/*'
-            case 'video':
-                return 'video/*'
-            default:
-                return '';
-        }
-    }
+    // const handleFileType = () => {
+    //     switch (props.type) {
+    //         case 'image':
+    //             return 'image/*'
+    //         case 'audio':
+    //             return 'audio/*'
+    //         case 'video':
+    //             return 'video/*'
+    //         default:
+    //             return '';
+    //     }
+    // }
     return (
         <Modal>
         <div className="relative w-full h-full flex flex-col justify-center items-center">
@@ -34,11 +34,11 @@ const MediaModal = (props: { type: string, toggle: Function, closeModal: Functio
             <div>
                 <input onKeyDown={handleLinkChange} className="w-full border border-gray-600 outline-none p-2 text-sm" type="text" aria-label="Insert Image Url or Link" placeholder="Insert image link or url..." />
             </div>
-            <span className="text-xl my-5">-----OR-----</span>
+            {/* <span className="text-xl my-5">-----OR-----</span>
             <div className="mt-4">
                 <label className="cursor-pointer bg-secondary text-white text-sm py-2 px-4" htmlFor="upload">Browse Files</label>
                 <input className="sr-only" onChange={handleChange} id="upload" type="file" accept={handleFileType()} />
-            </div>
+            </div> */}
             <button onClick={() => props.closeModal()} className="w-10 h-10 absolute text-xl top-1 right-1"><i className="fas fa-times-circle"></i></button>
         </div>
     </Modal>

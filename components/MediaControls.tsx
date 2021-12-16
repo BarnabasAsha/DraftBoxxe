@@ -22,7 +22,7 @@ const MediaControls = (props: { onToggle: Function }) => {
     return (
         <>
             <div>
-                <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('image')} aria-label="Upload Image"><i className="fas fa-image"></i></button>
+                <button className="border-0 outline-none text-gray-300 p-1 mx-2" onClick={() => triggerUpload('image')} aria-label="Upload Image"><i className="fas fa-image"></i></button>
                 {/* <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('video')} aria-label="Upload Video"><i className="fas fa-video"></i></button>
                 <button className="border-0 outline-none text-black p-1 mx-2" onClick={() => triggerUpload('audio')} aria-label="Upload Audio"><i className="fas fa-headphones"></i></button> */}
             </div>

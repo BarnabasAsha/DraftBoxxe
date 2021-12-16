@@ -4,7 +4,7 @@ const Audio = (props: { src: string }) => {
 };
 
 const Image = (props: { src: string }) => {
-    return <img src={props.src} className="w-full max-w-sm whitespace-normal" />;
+    return <img src={props.src} className="max-w-6xl w-full mx-auto whitespace-normal" />;
 };
 
 const Video = (props: { src: string }) => {

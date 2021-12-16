@@ -20,7 +20,7 @@ const Layout = (props: { children: any }) => {
     }, [session])
     
     return (
-        <main className="w-full h-screen bg-white">
+        <main className="w-full h-screen bg-secondary text-white">
             <Dialog>
               <Header />
             </Dialog>

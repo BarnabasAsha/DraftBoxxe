@@ -25,7 +25,7 @@
     "components/media/index.js",
     "components/rich/index.js",
     "components/richtext/index.js"
-  ],
+, "next.config.js"  ],
   "exclude": [
     "node_modules"
   ]

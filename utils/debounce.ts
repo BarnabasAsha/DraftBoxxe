@@ -1,5 +1,14 @@
-const debounce = () => {
-    return null
+const debounce = (fn, delay) => {
+    let timeout;
+    return function(...args) {
+        if(timeout) {
+            clearTimeout(timeout)
+        }
+       timeout = setTimeout(() => {
+            fn(...args)
+            console.log('running')
+        }, delay);
+    }
 }
 
 export default debounce

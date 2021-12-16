@@ -3,6 +3,7 @@ import Link from "next/link"
 import Layout from "../components/Layout"
 import Box from "../components/Box"
 import { searchNotes } from "../services/noteService"
+import Seo from "../components/Seo"
 
 interface iNote {title:string, id:Number, snapshot:string, created_at:string, slug:string, key:any}
 
@@ -30,6 +31,7 @@ const Search = () => {
 
     return (
         <Layout>
+        <Seo title="Search" />
        <div className="max-w-7xl w-full mx-auto p-4">
        <Link href="/library"><a className="mt-4 border rounded-lg border-gray-200 py-2 px-3" aria-label="Back to notes"><i className="fas fa-long-arrow-alt-left mr-2"></i>Back to library</a></Link>
             <div className="my-5 w-full flex justify-center mt-5">

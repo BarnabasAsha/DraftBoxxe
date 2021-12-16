@@ -1,12 +1,11 @@
 import Head from "next/head"
 import AuthHeader from "../components/AuthWrapper"
+import Seo from "../components/Seo"
 
 const VerifyEmail = () => {
     return (
         <AuthHeader>
-            <Head>
-                <title>Draftboxe</title>
-            </Head>
+            <Seo />
             <main className="h-screen w-screen flex">
                 <div className="h-full hidden md:block md:w-1/2 bg-primary"></div>
                 <div className="h-full w-full md:w-1/2 bg-tertiary flex flex-col justify-center px-20">

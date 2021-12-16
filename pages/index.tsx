@@ -1,13 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import HomeHeader from '../components/HomeHeader'
+import Seo from '../components/Seo'
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Hello Next</title>
-      </Head>
+      <Seo />
       <main>
           <div className="w-full bg-secondary h-screen text-white">
           <HomeHeader />

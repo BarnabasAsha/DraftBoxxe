@@ -5,6 +5,7 @@ import Box from "../components/Box"
 import Layout from "../components/Layout"
 import { getAllNotes, searchNotes } from '../services/noteService'
 import Dialog from '../components/Dialog'
+import Seo from '../components/Seo'
 
 interface iNote {title:string, id:Number, snapshot:string, created_at:string, slug:string, key:any}
 
@@ -34,6 +35,7 @@ const Library = () => {
     }, [])
     return (
         <Layout>
+            <Seo />
             <div className="w-100 p-10">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bold text-xl">My Notes</h2>

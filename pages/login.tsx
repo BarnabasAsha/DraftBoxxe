@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from 'next/router'
 import { login } from "../services/authService"
 import AuthWrapper from "../components/AuthWrapper"
+import Seo from "../components/Seo"
 
 const initials = {
     email: "",
@@ -39,9 +40,7 @@ export default function Login() {
 
     return (
         <AuthWrapper>
-            <Head>
-                <title>Draftboxe - Login</title>
-            </Head>
+            <Seo title="Login" />
             <main className="h-screen w-screen flex">
                 <div className="h-full hidden md:block md:w-1/2 bg-primary"></div>
                 <div className="h-full w-full md:w-1/2 bg-tertiary flex flex-col justify-center px-20">

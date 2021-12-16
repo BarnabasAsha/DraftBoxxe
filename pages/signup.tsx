@@ -5,6 +5,7 @@ import { signup } from '../services/authService'
 import { useRouter } from 'next/router'
 import toast, { Toaster } from "react-hot-toast"
 import AuthWrapper from "../components/AuthWrapper"
+import Seo from "../components/Seo"
 
 const initials = {
     userName: "",
@@ -39,9 +40,7 @@ export default function Signup() {
     }
     return (
         <AuthWrapper>
-            <Head>
-                <title>Hello Next</title>
-            </Head>
+            <Seo title="Create Account" />
             <main className="h-screen w-screen flex">
                 <div className="h-full hidden md:block md:w-1/2 bg-primary"></div>
                 <div className="h-full w-full md:w-1/2 bg-tertiary flex flex-col justify-center px-20">

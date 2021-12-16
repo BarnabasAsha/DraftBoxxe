@@ -1,14 +1,15 @@
-const debounce = (fn, delay) => {
+const debounce = (func, wait) => {
     let timeout;
-    return function(...args) {
-        if(timeout) {
-            clearTimeout(timeout)
-        }
-       timeout = setTimeout(() => {
-            fn(...args)
-            console.log('running')
-        }, delay);
-    }
-}
+  
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+  
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
 
 export default debounce

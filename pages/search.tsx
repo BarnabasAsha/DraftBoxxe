@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import Box from "../components/Box"
 import { searchNotes } from "../services/noteService"
 import Seo from "../components/Seo"
+import debounce from "../utils/debounce"
 
 interface iNote {title:string, id:Number, snapshot:string, created_at:string, slug:string, key:any}
 
@@ -12,12 +13,8 @@ const Search = () => {
     const [loading, setLoading] = useState(false)
     const [query, setQuery] = useState('')
 
-    const searchHandler = ({ target }) => {
-        setQuery(target.value)
-        runQuery()
-    }
-
     const runQuery = async () => {
+        console.log('uoo')
         try {
             setLoading(true)
             const { data } = await searchNotes(query)
@@ -27,6 +24,12 @@ const Search = () => {
         }finally {
             setLoading(false)
         }
+    }
+
+    const searchHandler = ({ target }) => {
+        setQuery(target.value)
+        const run = debounce(runQuery, 2000)
+        run()
     }
 
     return (

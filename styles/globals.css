@@ -38,29 +38,44 @@ body {
 
   .RichEditor-editor h1, .viewer h1 {
     font-size: 2em;
+    font-weight: bold;
   }
 
   .RichEditor-editor h2, .viewer h2 {
     font-size: 1.5em;
+    font-weight: bold;
   }
   .RichEditor-editor h3, .viewer h3 {
     font-size: 1.17em;
+    font-weight: bold;
   }
 
   .RichEditor-editor h4, .viewer h4 {
     font-size: 1em;
+    font-weight: bold;
   }
 
   .RichEditor-editor h5, .viewer h5 {
     font-size: .83em;
+    font-weight: bold;
   }
 
   .RichEditor-editor h6, .viewer h6 {
     font-size: .67em;
+    font-weight: bold;
   }
 
   .RichEditor-editor p, .viewer p {
     line-height: 2rem;
+  }
+
+  .RichEditor-editor a, .viewer a {
+    color: #5890ff;
+  }
+
+  .viewer ul {
+    list-style: disc;
+    margin: 10px 20px;
   }
   
   .RichEditor-editor .public-DraftEditorPlaceholder-root,

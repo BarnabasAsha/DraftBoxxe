@@ -37,6 +37,12 @@ export const searchNotes = async (query) => {
 }
 
 export const createNote = async (new_note:Note) => {
+    const { data } = await supabase.from('notes').select(`title`).eq('title', new_note.title)
+    if(data.length) {
+        throw {
+            message: 'Note title must be unique'
+        }
+    }
     const response = await supabase.from('notes').insert([new_note], {returning: 'minimal'})
     return response
 }

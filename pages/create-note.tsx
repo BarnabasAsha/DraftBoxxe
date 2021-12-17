@@ -4,6 +4,7 @@ import NoteEditor from '../components/NoteEditor'
 import supabase from '../utils/supaBaseClient'
 import { createNote } from '../services/noteService'
 import NoteHeader from '../components/NoteHeader'
+import toast, { Toaster } from 'react-hot-toast'
 
 const CreateNote = () => {
     const [content, updateContent] = useState({title: "", content: "", snapshot: ""})
@@ -26,9 +27,10 @@ const CreateNote = () => {
             }
            const {error} = await createNote(new_note)
            if (error) {
-            throw error
+            toast.error(error.message)
           }setEdit(false)
         }catch (e) {
+            toast.error(e.message)
             console.log(e.message)
         }finally {
             setLoading(false)
@@ -39,6 +41,7 @@ const CreateNote = () => {
         <Layout>
             <NoteHeader edit={edit} setEdit={setEdit} loading={loading} action={createNewNote} />
             <NoteEditor initialContent={{title: null, content: null}} saveContent={saveContent} />
+            <Toaster position='top-right' />
         </Layout>
     )
 }

@@ -5,19 +5,22 @@ import Box from "../components/Box"
 import { searchNotes } from "../services/noteService"
 import Seo from "../components/Seo"
 import debounce from "../utils/debounce"
+import EmptySearch from "../components/EmptySearch"
+import Loader from "../components/Loader"
 
 interface iNote {title:string, id:Number, snapshot:string, created_at:string, slug:string, key:any}
 
 const Search = () => {
     const [notes, setNotes] = useState<iNote[]>([])
     const [loading, setLoading] = useState(false)
+    const [noResult, setNoResult] = useState(false)
     const [query, setQuery] = useState('')
 
     const runQuery = async () => {
-        console.log('uoo')
         try {
             setLoading(true)
             const { data } = await searchNotes(query)
+            data.length ? setNoResult(false) : setNoResult(true)
             setNotes([...data])
         }catch(e) {
             console.log(e.message)
@@ -40,17 +43,19 @@ const Search = () => {
             <div className="my-5 w-full flex justify-center mt-5">
                 <input className="max-w-xl rounded-xl bg-transparent w-full py-4 px-6 border border-gray-200 mx-auto" name="search" type="search" placeholder="Search here..." value={query} onChange={searchHandler} autoFocus/>
             </div>
-            <ul className="mt-10 w-full p-4 max-w-6xl mx-auto grid grid-cols-layout items-center gap-5">
-                    {
-                        loading ? (
-                            <p>loading...</p>
-                        ) : (
-                            notes && notes.length ? (
+            {
+                loading ? (
+                    <Loader />
+                ) : (
+                    notes && notes.length ? (
+                        <ul className="mt-10 w-full p-4 max-w-6xl mx-auto grid grid-cols-layout items-center gap-5">
+                            {
                                 notes.map(note => <Box key={note.id} {...note} />)
-                            ) : null
-                        )
-                    }
-            </ul>
+                            }
+                        </ul>
+                    ) : noResult ? <EmptySearch /> : null
+                )
+            }
        </div>
         </Layout>
     )

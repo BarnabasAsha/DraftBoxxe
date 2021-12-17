@@ -13,7 +13,7 @@ const HomeHeader = () => {
                 </a>
             </Link>
             <Link href="/signup">
-                  <a className="flex justify-center items-center text-sm md:text-base w-32 md:w-40 h-10 md:h-12 border-2 rounded-lg border-white text-white"><span className="font-medium">Sign-up</span> - it's free</a>
+                  <a className="flex justify-center items-center text-sm md:text-base w-32 md:w-40 h-10 md:h-12 border-2 rounded-lg border-white text-white"><span className="font-medium">Sign up</span> - it's free</a>
             </Link>
             </div>
         </header>

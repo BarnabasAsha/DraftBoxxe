@@ -7,6 +7,7 @@ import NoteHeader from '../components/NoteHeader'
 
 const CreateNote = () => {
     const [content, updateContent] = useState({title: "", content: "", snapshot: ""})
+    const [edit, setEdit] = useState(true)
     const [loading, setLoading] = useState(false)
     const user = supabase.auth.user()
 
@@ -26,7 +27,7 @@ const CreateNote = () => {
            const {error} = await createNote(new_note)
            if (error) {
             throw error
-          }
+          }setEdit(false)
         }catch (e) {
             console.log(e.message)
         }finally {
@@ -36,7 +37,7 @@ const CreateNote = () => {
 
     return (
         <Layout>
-            <NoteHeader loading={loading} action={createNewNote} />
+            <NoteHeader edit={edit} setEdit={setEdit} loading={loading} action={createNewNote} />
             <NoteEditor initialContent={{title: null, content: null}} saveContent={saveContent} />
         </Layout>
     )

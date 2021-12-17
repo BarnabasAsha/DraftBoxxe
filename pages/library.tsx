@@ -6,8 +6,10 @@ import Layout from "../components/Layout"
 import { getAllNotes, searchNotes } from '../services/noteService'
 import Dialog from '../components/Dialog'
 import Seo from '../components/Seo'
+import EmptyList from '../components/EmptyList'
+import Loader from '../components/Loader'
 
-interface iNote {title:string, id:Number, snapshot:string, created_at:string, slug:string, key:any}
+interface iNote { title: string, id: Number, snapshot: string, created_at: string, slug: string, key: any }
 
 const Library = () => {
     const [notes, updateNotes] = useState<iNote[]>([])
@@ -18,7 +20,7 @@ const Library = () => {
         try {
             setLoading(true)
             const { data } = await getAllNotes()
-            updateNotes(data)
+            updateNotes([...data])
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -33,6 +35,7 @@ const Library = () => {
     useEffect(() => {
         getNotes()
     }, [])
+
     return (
         <Layout>
             <Seo />
@@ -41,21 +44,29 @@ const Library = () => {
                     <h2 className="font-bold text-xl">My Notes</h2>
                     <Link href="/create-note"><a className="bg-white rounded text-secondary font-semibold px-4 py-2 text-sm"><span className="mr-1"><i className="fas fa-plus"></i></span> New Note</a></Link>
                 </div>
-                <div>
-                <input className="mt-5 rounded border border-white bg-transparent p-3 w-64 h-10 outline-none" type="search" placeholder="Search here..." onSelect={searchToggler} />
-                </div>
+                {
+                    notes && notes.length ? (
+                        <div>
+                            <input className="mt-5 rounded border border-white bg-transparent p-3 w-64 h-10 outline-none" type="search" placeholder="Search here..." onSelect={searchToggler} />
+                        </div>
+                    ) : null
+                }
                 <Dialog>
-                <ul className="mt-10 w-full grid grid-cols-layout items-center gap-5">
                     {
                         loading ? (
-                            <p>loading...</p>
+                            <Loader />
                         ) : (
                             notes && notes.length ? (
-                                notes.map(note => <Box key={note.id} {...note} />)
-                            ) : null
+                                <ul className="mt-10 w-full grid grid-cols-layout items-center gap-5">
+                                    {
+                                        notes.map(note => <Box key={note.id} {...note} />)
+
+                                    }
+                                </ul>
+                            ) : <EmptyList />
                         )
                     }
-                </ul>
+
                 </Dialog>
             </div>
         </Layout>

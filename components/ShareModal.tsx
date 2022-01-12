@@ -3,7 +3,7 @@ import toast, { Toaster } from "react-hot-toast"
 
 const ShareModal = ({ slug, title, closeModal }: { slug: string, title: string, closeModal: () => void }) => {
 
-    const url = `localhost:3000/share/${slug}`
+    const url = `https://draftboxe.netlify.app/share/${slug}`
 
     const handleCopy = () => {
         navigator.clipboard.writeText(url);

@@ -1,4 +1,3 @@
-import Head from "next/head"
 import { useState } from "react"
 import FormInput from "../components/FormInput"
 import toast, { Toaster } from "react-hot-toast"
@@ -26,11 +25,11 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        if(userDetails.email === "" && userDetails.password === "" ) {
+        if (userDetails.email === "" && userDetails.password === "") {
             return
         }
         const { error } = await login(userDetails)
-        if(error) {
+        if (error) {
             toast.error(error.message)
         } else {
             toast.success('Successfully Logged In')

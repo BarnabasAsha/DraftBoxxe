@@ -4,7 +4,6 @@ import Viewer from "../../components/Viewer"
 import supabase from "../../utils/supaBaseClient"
 
 const NoteView = ({ note }) => {
-    console.log(note.created_by)
     return (
         <div className="bg-secondary text-gray-200">
             <header className="p-4">
@@ -24,7 +23,7 @@ export const getStaticPaths = async () => {
     const paths = data.map(slug => ({ params: { slug: slug.slug } }))
     return {
         paths: paths,
-        fallback: true
+        fallback: false
     }
 }
 
